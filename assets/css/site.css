@@ -193,12 +193,13 @@ footer a:hover{color:var(--ink)}
 .err-page p{color:var(--muted);margin:12px 0 28px}
 
 @media (max-width:900px){
-  #menu{display:block}
+  #menu{display:inline-block}
   nav{display:none;position:absolute;left:0;right:0;top:72px;background:var(--bg);flex-direction:column;align-items:stretch;padding:12px 24px 20px;border-bottom:1px solid var(--line)}
   nav.open{display:flex}
   nav a{padding:12px 0;min-height:44px}
   nav .btn{display:none}
-  .book-mini{display:inline-block;padding:10px 16px;min-height:44px;font-size:.95rem;white-space:nowrap}
+  #menu,.book-mini{padding:10px 16px;min-height:44px;font-size:.95rem;white-space:nowrap}
+  .book-mini{display:inline-block}
   .bar{gap:10px}
   .bar .logo{margin-right:auto}
   .trio{grid-template-columns:1fr}.trio .ph{aspect-ratio:4/3}
@@ -283,8 +284,7 @@ footer a:hover{color:var(--ink)}
 @media (max-width:400px){
   .logo{font-size:1.25rem;letter-spacing:.08em}
   .logo-img{width:32px;height:32px}
-  #menu{padding:8px 10px;font-size:.9rem}
-  .book-mini{padding:8px 12px;font-size:.85rem}
+  #menu,.book-mini{padding:8px 12px;font-size:.85rem}
 }
 /* ---- periodic shine system ---- */
 /* Glint: a blade of light with a halo sweeps across the name + slogan

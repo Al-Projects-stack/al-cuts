@@ -466,11 +466,9 @@
       "Free rebooking up to 24 hours before. Arrive 5 minutes early.</p>" +
       "<div class='cta' style='justify-content:center'>" +
       "<a class='btn' id='gcal' href='" + gUrl.replace(/'/g, "%27") + "' target='_blank' rel='noopener'>Add to Google Calendar</a>" +
-      "<button class='btn line' id='applecal' type='button'>Add to Apple Calendar</button>" +
-      "<button class='btn line' id='dlcal' type='button'>Download .ics</button></div>" +
+      "<button class='btn line' id='applecal' type='button'>Add to Apple Calendar</button></div>" +
       "<p><a class='more' href='./'>Book another →</a></p></div>";
     document.getElementById("applecal").addEventListener("click", function () { downloadICS(b); });
-    document.getElementById("dlcal").addEventListener("click", function () { downloadICS(b); });
     done.scrollIntoView({ block: "start" });
   }
 
