@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book and contact | AL CUTS</title>
+<meta name="description" content="Book your chair at AL CUTS, 12 Oxford Road Rosebank Johannesburg. Open Tue–Sat. Call 011 555 0142.">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="../" aria-label="AL CUTS home"><img src="../assets/img/logo.svg" alt="" width="32" height="32" aria-hidden="true">AL CUTS</a>
+    <button id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav" aria-label="Primary">
+      <a href="../">Home</a><a href="../services/">Services</a><a href="../about/">About</a><a href="./" aria-current="page">Contact</a>
+      <a class="btn" href="./">Book Now</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero short">
+    <div class="ph" role="img" aria-label="AL CUTS booking desk">
+      <img src="../assets/img/hero.webp" alt="Barber at work — book your chair at AL CUTS" fetchpriority="high" decoding="async">
+      <div class="shade" aria-hidden="true"></div>
+    </div>
+    <div class="wrap in">
+      <p class="kicker">Contact and booking</p>
+      <h1>Your chair is ready</h1>
+      <p class="sub">Tuesday to Saturday. Rosebank, Johannesburg.</p>
+    </div>
+  </section>
+
+  <div class="wrap bookgrid">
+    <section class="panel" aria-labelledby="bh">
+      <h2 id="bh">Book a chair</h2>
+      <p class="sub">Pick a service, barber and time. Pay at the chair — card or cash.</p>
+      <div class="offer-note" id="offer-note" hidden>First-visit offer applied: <strong>R30 off</strong>. Shown in your summary below.</div>
+      <form id="bookform" novalidate>
+        <div class="field">
+          <label for="f-service">Service</label>
+          <select id="f-service" name="service"><option value="">Select a service</option></select>
+          <p class="err" id="e-service" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="f-barber">Barber</label>
+          <select id="f-barber" name="barber"><option value="">First available</option></select>
+        </div>
+        <div class="frow">
+          <div class="field">
+            <label for="f-date">Date</label>
+            <input id="f-date" name="date" type="date">
+            <p class="err" id="e-date" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="f-time">Time</label>
+            <select id="f-time" name="time" disabled><option value="">Pick a date first</option></select>
+            <p class="err" id="e-time" role="alert"></p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Thabo M">
+            <p class="err" id="e-name" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 082 555 0142">
+            <p class="err" id="e-phone" role="alert"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-notes">Notes (optional)</label>
+          <textarea id="f-notes" name="notes" rows="3" placeholder="Reference photo, hair type, anything we should know"></textarea>
+        </div>
+        <div class="summary" id="summary" aria-live="polite"></div>
+        <button class="btn" type="submit" style="width:100%">Confirm booking</button>
+        <p style="color:var(--muted);font-size:.92rem">Free rebooking within 24 hours. Walk-ins welcome when chairs are free.</p>
+      </form>
+      <div id="bookdone" hidden></div>
+    </section>
+
+    <aside class="info" aria-label="Business info">
+      <section class="panel">
+        <h2>Visit us</h2>
+        <p class="sub">12 Oxford Road, Rosebank, Johannesburg</p>
+        <p>Phone: <a href="tel:+27115550142">011 555 0142</a><br>
+        Email: <a href="mailto:book@alcuts.co.za">book@alcuts.co.za</a></p>
+        <table class="hours" aria-label="Opening hours">
+          <tr><td>Tue – Fri</td><td>9:00 – 18:00</td></tr>
+          <tr><td>Saturday</td><td>8:00 – 16:00</td></tr>
+          <tr><td>Sun – Mon</td><td>Closed</td></tr>
+        </table>
+        <div class="map">
+          <iframe title="Map showing AL CUTS at 12 Oxford Road, Rosebank, Johannesburg" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=28.0340%2C-26.1500%2C28.0600%2C-26.1300&amp;layer=mapnik&amp;marker=-26.1400%2C28.0470"></iframe>
+        </div>
+        <p style="margin:14px 0 0"><a class="btn line" href="https://www.google.com/maps/search/?api=1&amp;query=12+Oxford+Road+Rosebank+Johannesburg" target="_blank" rel="noopener">Get directions</a></p>
+      </section>
+      <section class="panel">
+        <h2>Good to know</h2>
+        <p class="sub">Card and cash accepted. Fresh blade per shave. Tools sanitised after every client.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><div class="foot-brand"><img src="../assets/img/logo.svg" alt="" width="30" height="30" aria-hidden="true"><h4>AL CUTS</h4></div>Sharp by name. Sharp by nature.</div>
+    <div><h4>Explore</h4><a href="../services/">Services</a><a href="../about/">About</a><a href="./">Book Now</a></div>
+    <div><h4>Hours</h4>Tue to Fri 9:00 to 18:00<br>Sat 8:00 to 16:00<br>Sun and Mon closed</div>
+    <div><h4>Visit</h4>12 Oxford Road, Rosebank<br>011 555 0142<a href="./">Contact and map</a></div>
+  </div>
+  <div class="copy"><span>&copy; 2026 AL CUTS. All rights reserved.</span><span><a href="../terms/">Terms and Conditions</a><a href="../privacy/">Privacy</a></span></div>
+</div></footer>
+
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="mt">
+  <div class="dialog">
+    <button class="x" id="close" aria-label="Close offer">&times;</button>
+    <h2 id="mt">First cut? R30 off.</h2>
+    <p>Book your first visit online and the discount is applied at the chair.</p>
+    <a class="btn" id="claim" href="./?offer=first30">Claim the offer</a>
+  </div>
+</div>
+
+<script src="../assets/js/services-data.js" defer></script>
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/book.js" defer></script>
+</body>
+</html>
