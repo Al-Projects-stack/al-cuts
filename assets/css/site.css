@@ -31,6 +31,7 @@ nav a[aria-current="page"]{color:var(--ink);border-bottom:2px solid var(--red);p
 .btn.line:hover{background:var(--ink);color:var(--bg)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
 #menu{display:none;background:none;border:1px solid var(--steel);color:var(--ink);padding:8px 14px;font:600 1rem "Barlow Condensed",sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.book-mini{display:none}
 
 /* image system — dark cool grade, object-fit cover */
 .ph{position:relative;overflow:hidden;background:#15171a}
@@ -176,7 +177,15 @@ footer a:hover{color:var(--ink)}
 .dialog{background:var(--panel);max-width:440px;width:100%;padding:40px 34px;position:relative;border:1px solid var(--line);border-top:4px solid var(--red)}
 .dialog h2{font-size:2.4rem;margin-bottom:10px}
 .dialog p{color:var(--muted);margin:0 0 22px}
-.x{position:absolute;top:8px;right:14px;background:none;border:0;color:var(--ink);font-size:2rem;cursor:pointer;line-height:1}
+.x{position:absolute;top:6px;right:6px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:var(--ink);font-size:1.8rem;cursor:pointer;line-height:1}
+
+/* offer-claimed toast notification */
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);z-index:40;background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--red);color:var(--ink);padding:16px 20px;max-width:min(440px,calc(100vw - 40px));opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease}
+.toast.show{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.toast p{margin:0 0 12px;color:var(--steel)}
+.toast .row{display:flex;gap:10px;align-items:center;justify-content:space-between}
+.toast .btn{padding:10px 18px;font-size:.95rem}
+.toast .tclose{background:none;border:0;color:var(--muted);font-size:1.4rem;cursor:pointer;min-width:44px;min-height:44px}
 
 /* 404 */
 .err-page{min-height:80svh;display:flex;align-items:center;text-align:center;padding-top:72px}
@@ -188,6 +197,10 @@ footer a:hover{color:var(--ink)}
   nav{display:none;position:absolute;left:0;right:0;top:72px;background:var(--bg);flex-direction:column;align-items:stretch;padding:12px 24px 20px;border-bottom:1px solid var(--line)}
   nav.open{display:flex}
   nav a{padding:12px 0;min-height:44px}
+  nav .btn{display:none}
+  .book-mini{display:inline-block;padding:10px 16px;min-height:44px;font-size:.95rem;white-space:nowrap}
+  .bar{gap:10px}
+  .bar .logo{margin-right:auto}
   .trio{grid-template-columns:1fr}.trio .ph{aspect-ratio:4/3}
   .duo{grid-template-columns:1fr}
   .cards,.profiles{grid-template-columns:1fr}
@@ -241,7 +254,10 @@ footer a:hover{color:var(--ink)}
 /* legal long-form with sticky TOC */
 .legalgrid{display:grid;grid-template-columns:240px 1fr;gap:48px;padding:60px 0 100px;align-items:start}
 .toc{position:sticky;top:96px;border:1px solid var(--line);background:var(--panel);padding:20px}
-.toc h2{font-size:1.2rem;margin-bottom:10px;color:var(--steel)}
+.toc-toggle{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:0;padding:10px 0;min-height:44px;cursor:pointer;font:600 1.2rem "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--steel)}
+.toc-toggle::after{content:"–";font-size:1.4rem;line-height:1}
+.toc:not(.open) .toc-toggle::after{content:"+"}
+.toc:not(.open) ol{display:none}
 .toc ol{list-style:none;margin:0;padding:0}
 .toc li{margin:0}
 .toc a{display:block;text-decoration:none;color:var(--muted);font-size:.92rem;padding:7px 0;min-height:44px}
@@ -252,9 +268,16 @@ footer a:hover{color:var(--ink)}
 .legal a{color:var(--steel)}
 
 /* footer social */
-.social{display:flex;gap:16px;margin-top:12px}
+.social{display:flex;gap:16px;margin-top:12px;flex-wrap:wrap;row-gap:0}
+.fgrid>div{min-width:0}
 .social a{display:inline-block;padding:10px 0;min-height:44px}
 @media (max-width:900px){.legalgrid{grid-template-columns:1fr}.toc{position:static}}
+@media (max-width:400px){
+  .logo{font-size:1.25rem;letter-spacing:.08em}
+  .logo-img{width:32px;height:32px}
+  #menu{padding:8px 10px;font-size:.9rem}
+  .book-mini{padding:8px 12px;font-size:.85rem}
+}
 /* ---- periodic shine system ---- */
 /* Glint: a blade of light with a halo sweeps across the name + slogan
    every 5s. The text itself is never touched — light passes over it and

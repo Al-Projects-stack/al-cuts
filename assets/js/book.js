@@ -189,13 +189,14 @@
         btn.className = "day";
         btn.textContent = d;
         if (open[ds]) {
+          btn.setAttribute("data-date", ds);
           btn.setAttribute("aria-label", dateLabel(ds));
           if (ds === state.date) { btn.classList.add("sel"); btn.setAttribute("aria-pressed", "true"); }
           else btn.setAttribute("aria-pressed", "false");
           (function (date) {
             btn.addEventListener("click", function () {
               state.date = date; state.time = null;
-              persist(); renderCal(); renderSlots(); setErr("e-3", "");
+              persist(); paintDaySel(); renderSlots(); setErr("e-3", "");
             });
           })(ds);
         } else {
@@ -208,6 +209,15 @@
       calBox.appendChild(wrap);
     });
     renderSlots();
+  }
+
+  /* Selection paints in place (no rebuild) so focus is never dropped. */
+  function paintDaySel() {
+    Array.prototype.forEach.call(calBox.querySelectorAll(".day:not(:disabled)"), function (btn) {
+      var on = btn.getAttribute("data-date") === state.date;
+      btn.classList.toggle("sel", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
   }
 
   function renderSlots() {
@@ -236,9 +246,17 @@
       b.setAttribute("aria-label", t + " Johannesburg time");
       b.addEventListener("click", function () {
         state.time = t;
-        persist(); renderSlots(); setErr("e-3", "");
+        persist(); paintSlotSel(); setErr("e-3", "");
       });
       slotBox.appendChild(b);
+    });
+  }
+
+  function paintSlotSel() {
+    Array.prototype.forEach.call(slotBox.querySelectorAll(".slot"), function (b) {
+      var on = b.textContent === state.time;
+      b.classList.toggle("sel", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
     });
   }
 

@@ -26,6 +26,20 @@
     });
   }
 
+  /* Legal pages: collapsible table of contents (starts collapsed on mobile) */
+  var toc = document.querySelector(".toc");
+  var tocToggle = document.querySelector(".toc-toggle");
+  if (toc && tocToggle) {
+    if (window.matchMedia("(max-width:900px)").matches) {
+      toc.classList.remove("open");
+      tocToggle.setAttribute("aria-expanded", "false");
+    }
+    tocToggle.addEventListener("click", function () {
+      var open = toc.classList.toggle("open");
+      tocToggle.setAttribute("aria-expanded", String(open));
+    });
+  }
+
   var modal = document.getElementById("modal");
   if (!modal) return;
   var closeBtn = document.getElementById("close");
@@ -70,7 +84,51 @@
   }
 
   if (closeBtn) closeBtn.addEventListener("click", close);
-  if (claimBtn) claimBtn.addEventListener("click", close);
+  if (claimBtn) claimBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    var href = claimBtn.getAttribute("href");
+    close();
+    showToast(href);
+  });
+
+  /* Claiming the offer shows a notification instead of navigating away:
+     the R30 off appears later in the booking summary. */
+  function showToast(bookHref) {
+    var old = document.getElementById("toast");
+    if (old) old.remove();
+    var t = document.createElement("div");
+    t.className = "toast";
+    t.id = "toast";
+    t.setAttribute("role", "status");
+    var p = document.createElement("p");
+    p.textContent = "Offer saved. Your R30 off will show in the booking summary when you book.";
+    var row = document.createElement("div");
+    row.className = "row";
+    var a = document.createElement("a");
+    a.className = "btn";
+    a.href = bookHref;
+    a.textContent = "Book now";
+    var x = document.createElement("button");
+    x.className = "tclose";
+    x.setAttribute("aria-label", "Dismiss notification");
+    x.textContent = "×";
+    x.addEventListener("click", function () {
+      t.classList.remove("show");
+      window.setTimeout(function () { if (t.parentNode) t.remove(); }, 350);
+    });
+    row.appendChild(a);
+    row.appendChild(x);
+    t.appendChild(p);
+    t.appendChild(row);
+    document.body.appendChild(t);
+    window.requestAnimationFrame(function () { t.classList.add("show"); });
+    window.setTimeout(function () {
+      if (t.parentNode) {
+        t.classList.remove("show");
+        window.setTimeout(function () { if (t.parentNode) t.remove(); }, 400);
+      }
+    }, 7000);
+  }
   modal.addEventListener("click", function (e) { if (e.target === modal) close(); });
 
   if (!seen) {
