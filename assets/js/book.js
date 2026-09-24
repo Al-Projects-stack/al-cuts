@@ -295,6 +295,8 @@
     }
     slotBox.innerHTML = "";
     slotBox.appendChild(inner);
+    // Force a reflow between the content swap and .open so the slide-down animates
+    void slotBox.offsetHeight;
     slotBox.classList.toggle("open", !!state.date);
   }
 
