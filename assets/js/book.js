@@ -22,7 +22,7 @@
   var MO_S = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   var state = { service: null, barber: "any", date: null, time: null,
-    name: "", email: "", phone: "", notes: "" };
+    name: "", email: "", phone: "", notes: "", calYm: null };
 
   // Restore mid-flow progress (refresh), then let URL params win.
   try {
@@ -148,66 +148,112 @@
   var calBox = document.getElementById("cal");
   var slotBox = document.getElementById("slots");
 
+  function currentYm() {
+    var s = CAL.sastParts(Date.now());
+    return s.y + "-" + String(s.m).padStart(2, "0");
+  }
+
+  function shiftYm(ym, n) {
+    var y = +ym.slice(0, 4), m = +ym.slice(5, 7) + n;
+    while (m < 1) { m += 12; y--; }
+    while (m > 12) { m -= 12; y++; }
+    return y + "-" + String(m).padStart(2, "0");
+  }
+
+  function scrollSlots() {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById("slots").scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
+  }
+
+  /* One month at a time with prev/next paging (no long scroll). */
   function renderCal() {
     var open = {};
     CAL.bookableDates().forEach(function (d) { open[d] = true; });
     // Drop a restored date that has since passed.
-    if (state.date && !open[state.date]) { state.date = null; state.time = null; persist(); }
+    if (state.date && !open[state.date]) { state.date = null; state.time = null; }
+    var keys = Object.keys(open);
+    var cur = currentYm();
+    var max = keys[keys.length - 1].slice(0, 7);
+    var ym = state.calYm;
+    if (!ym || ym < cur || ym > max) {
+      ym = state.date ? state.date.slice(0, 7) : cur;
+      if (ym < cur) ym = cur;
+      if (ym > max) ym = max;
+      state.calYm = ym;
+    }
+    persist();
     calBox.innerHTML = "";
-    var months = [];
-    Object.keys(open).forEach(function (d) {
-      var k = d.slice(0, 7);
-      if (months.indexOf(k) === -1) months.push(k);
+    var y = +ym.slice(0, 4), m = +ym.slice(5, 7);
+
+    var pager = document.createElement("div");
+    pager.className = "pager";
+    var prev = document.createElement("button");
+    prev.type = "button";
+    prev.className = "pagenav";
+    prev.textContent = "‹";
+    prev.setAttribute("aria-label", "Previous month");
+    prev.disabled = (ym <= cur);
+    var ptitle = document.createElement("p");
+    ptitle.className = "mtitle";
+    ptitle.setAttribute("aria-live", "polite");
+    ptitle.textContent = MO[m - 1] + " " + y;
+    var next = document.createElement("button");
+    next.type = "button";
+    next.className = "pagenav";
+    next.textContent = "›";
+    next.setAttribute("aria-label", "Next month");
+    next.disabled = (ym >= max);
+    prev.addEventListener("click", function () { state.calYm = shiftYm(ym, -1); persist(); renderCal(); });
+    next.addEventListener("click", function () { state.calYm = shiftYm(ym, 1); persist(); renderCal(); });
+    pager.appendChild(prev);
+    pager.appendChild(ptitle);
+    pager.appendChild(next);
+    calBox.appendChild(pager);
+
+    var wrap = document.createElement("div");
+    wrap.className = "month";
+    var grid = document.createElement("div");
+    grid.className = "days";
+    grid.setAttribute("role", "group");
+    grid.setAttribute("aria-label", MO[m - 1] + " " + y + " bookable days");
+    ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].forEach(function (d) {
+      var s = document.createElement("span");
+      s.className = "dow"; s.textContent = d; s.setAttribute("aria-hidden", "true");
+      grid.appendChild(s);
     });
-    months.forEach(function (k) {
-      var y = +k.slice(0, 4), m = +k.slice(5, 7);
-      var wrap = document.createElement("div");
-      wrap.className = "month";
-      var h = document.createElement("h4");
-      h.textContent = MO[m - 1] + " " + y;
-      wrap.appendChild(h);
-      var grid = document.createElement("div");
-      grid.className = "days";
-      grid.setAttribute("role", "group");
-      grid.setAttribute("aria-label", MO[m - 1] + " " + y + " bookable days");
-      ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"].forEach(function (d) {
-        var s = document.createElement("span");
-        s.className = "dow"; s.textContent = d; s.setAttribute("aria-hidden", "true");
-        grid.appendChild(s);
-      });
-      var first = (new Date(Date.UTC(y, m - 1, 1)).getUTCDay() + 6) % 7; // Monday-first
-      for (var i = 0; i < first; i++) {
-        var padEl = document.createElement("span");
-        padEl.className = "pad"; padEl.setAttribute("aria-hidden", "true");
-        grid.appendChild(padEl);
+    var first = (new Date(Date.UTC(y, m - 1, 1)).getUTCDay() + 6) % 7; // Monday-first
+    for (var i = 0; i < first; i++) {
+      var padEl = document.createElement("span");
+      padEl.className = "pad"; padEl.setAttribute("aria-hidden", "true");
+      grid.appendChild(padEl);
+    }
+    var dim = new Date(Date.UTC(y, m, 0)).getUTCDate();
+    for (var d = 1; d <= dim; d++) {
+      var ds = y + "-" + String(m).padStart(2, "0") + "-" + String(d).padStart(2, "0");
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "day";
+      btn.textContent = d;
+      if (open[ds]) {
+        btn.setAttribute("data-date", ds);
+        btn.setAttribute("aria-label", dateLabel(ds));
+        if (ds === state.date) { btn.classList.add("sel"); btn.setAttribute("aria-pressed", "true"); }
+        else btn.setAttribute("aria-pressed", "false");
+        (function (date) {
+          btn.addEventListener("click", function () {
+            state.date = date; state.time = null;
+            persist(); paintDaySel(); renderSlots(); setErr("e-3", "");
+            scrollSlots();
+          });
+        })(ds);
+      } else {
+        btn.disabled = true;
+        btn.setAttribute("aria-label", d + " " + MO[m - 1] + ": closed or unavailable");
       }
-      var dim = new Date(Date.UTC(y, m, 0)).getUTCDate();
-      for (var d = 1; d <= dim; d++) {
-        var ds = y + "-" + String(m).padStart(2, "0") + "-" + String(d).padStart(2, "0");
-        var btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "day";
-        btn.textContent = d;
-        if (open[ds]) {
-          btn.setAttribute("data-date", ds);
-          btn.setAttribute("aria-label", dateLabel(ds));
-          if (ds === state.date) { btn.classList.add("sel"); btn.setAttribute("aria-pressed", "true"); }
-          else btn.setAttribute("aria-pressed", "false");
-          (function (date) {
-            btn.addEventListener("click", function () {
-              state.date = date; state.time = null;
-              persist(); paintDaySel(); renderSlots(); setErr("e-3", "");
-            });
-          })(ds);
-        } else {
-          btn.disabled = true;
-          btn.setAttribute("aria-label", d + " " + MO[m - 1] + ": closed or unavailable");
-        }
-        grid.appendChild(btn);
-      }
-      wrap.appendChild(grid);
-      calBox.appendChild(wrap);
-    });
+      grid.appendChild(btn);
+    }
+    wrap.appendChild(grid);
+    calBox.appendChild(wrap);
     renderSlots();
   }
 
@@ -247,6 +293,7 @@
       b.addEventListener("click", function () {
         state.time = t;
         persist(); paintSlotSel(); setErr("e-3", "");
+        go(4); // time picked — move straight to details
       });
       slotBox.appendChild(b);
     });

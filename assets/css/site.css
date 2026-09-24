@@ -233,6 +233,12 @@ footer a:hover{color:var(--ink)}
 .opt.sel{border-color:var(--red);background:#1a1214}
 .month{margin-top:18px}
 .month h4{font:600 1.3rem "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);margin:0 0 10px}
+/* single-month pager */
+.pager{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+.pager .mtitle{margin:0;font:600 1.5rem "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+.pagenav{min-width:44px;min-height:44px;background:var(--bg);border:1px solid var(--line);color:var(--ink);font-size:1.5rem;line-height:1;cursor:pointer}
+.pagenav:hover:not(:disabled){border-color:var(--steel)}
+.pagenav:disabled{opacity:.3;cursor:not-allowed}
 .days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
 .days .dow{font:600 .8rem "Barlow Condensed",sans-serif;letter-spacing:.1em;color:var(--muted);text-align:center;padding:4px 0}
 .days .pad{min-height:44px}
