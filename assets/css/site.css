@@ -255,11 +255,12 @@ footer a:hover{color:var(--ink)}
   16%{background-position:-210% center}
   100%{background-position:-210% center}
 }
-.shine{position:relative;display:inline-block}
+.shine{position:relative}
+.logo .shine,.tagline{display:inline-block}
 .shine::after{
   content:attr(data-text);
   position:absolute;inset:0;
-  background-image:linear-gradient(100deg,transparent 43%,rgba(255,255,255,.85) 50%,transparent 57%);
+  background-image:linear-gradient(100deg,transparent 38%,rgba(0,0,0,.4) 46%,rgba(255,255,255,.95) 50%,rgba(0,0,0,.4) 54%,transparent 62%);
   background-size:230% 100%;
   background-repeat:no-repeat;
   -webkit-background-clip:text;
