@@ -12,7 +12,7 @@ window.ALCUTS_SERVICES = [
 window.ALCUTS_BARBERS = [
   { id: "al", name: "Al Mujati", role: "Founder, fades", bio: "Founded AL CUTS in 2014. Skin fades and sharp hairlines are his signature." },
   { id: "sipho", name: "Sipho Dlamini", role: "Classic cuts, hot towel", bio: "Old-school craft: scissor work, classic tapers and the full hot-towel ritual." },
-  { id: "lerato", name: "Lerato Naidoo", role: "Beards, kids", bio: "Beard architecture and patient kids cuts. Detail-obsessed finisher." }
+  { id: "caitlin", name: "Caitlin Van Wyk", role: "Beards, kids", bio: "Beard architecture and patient kids cuts. Detail-obsessed finisher." }
 ];
 
 window.ALCUTS_OFFER = { code: "first30", label: "First-visit offer", amount: 30 };

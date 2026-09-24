@@ -38,6 +38,14 @@ nav a[aria-current="page"]{color:var(--ink);border-bottom:2px solid var(--red);p
 .ph::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(20,34,48,.28),rgba(10,10,11,.12) 45%,rgba(10,10,11,.55)),repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,255,255,.03) 46px 48px)}
 .cap{position:absolute;left:16px;bottom:12px;z-index:3;font:500 .8rem Barlow,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);text-shadow:0 1px 8px rgba(0,0,0,.8)}
 
+/* customer reviews revealed on hover, tap or keyboard focus */
+.review-card{cursor:pointer}
+.review{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:26px 24px;background:linear-gradient(180deg,rgba(10,10,11,.05) 30%,rgba(10,10,11,.9));opacity:0;transition:opacity .3s ease}
+.review-card:hover .review,.review-card:focus .review,.review-card:focus-within .review{opacity:1}
+.review .stars{color:var(--red);letter-spacing:.2em;margin-bottom:8px;font-size:.95rem}
+.review p{color:var(--ink);font-size:1.08rem;line-height:1.45;margin:0 0 10px}
+.review cite{font:600 .95rem "Barlow Condensed",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--steel);font-style:normal}
+
 /* hero + bands */
 .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding-bottom:9vh}
 .hero.short{min-height:72svh}
@@ -248,8 +256,9 @@ footer a:hover{color:var(--ink)}
 .social a{display:inline-block;padding:10px 0;min-height:44px}
 @media (max-width:900px){.legalgrid{grid-template-columns:1fr}.toc{position:static}}
 /* ---- periodic shine system ---- */
-/* Glint: a band of light sweeps ON TOP of the name + slogan every 5s.
-   The base text stays fully solid; only the overlay flashes. */
+/* Glint: a blade of light with a halo sweeps across the name + slogan
+   every 5s. The text itself is never touched — light passes over it and
+   spills onto the photo around the letters, so it reads on any colour. */
 @keyframes glintSweep{
   0%{background-position:210% center}
   16%{background-position:-210% center}
@@ -260,13 +269,14 @@ footer a:hover{color:var(--ink)}
 .shine::after{
   content:attr(data-text);
   position:absolute;inset:0;
-  background-image:linear-gradient(100deg,transparent 38%,rgba(0,0,0,.4) 46%,rgba(255,255,255,.95) 50%,rgba(0,0,0,.4) 54%,transparent 62%);
+  background-image:linear-gradient(100deg,transparent 42%,rgba(255,255,255,.9) 47%,#fff 50%,rgba(255,255,255,.9) 53%,transparent 58%);
   background-size:230% 100%;
   background-repeat:no-repeat;
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
   -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 14px rgba(255,255,255,.85));
   animation:glintSweep 5s ease-in-out infinite;
   pointer-events:none;
 }
