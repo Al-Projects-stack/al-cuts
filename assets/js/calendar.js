@@ -187,6 +187,17 @@
       "&location=" + q("AL CUTS, 12 Oxford Road, Rosebank, Johannesburg");
   }
 
+  /* Android intent URL: opens the Google Calendar APP when it is installed,
+     otherwise falls back to the same web template link. iOS keeps the
+     https link, which the app opens directly when installed. */
+  function googleCalendarIntentUrl(b) {
+    var web = googleCalendarUrl(b);
+    var query = web.slice(web.indexOf("?") + 1);
+    return "intent://calendar.google.com/calendar/render?" + query +
+      "#Intent;scheme=https;package=com.google.android.calendar" +
+      ";S.browser_fallback_url=" + encodeURIComponent(web) + ";end";
+  }
+
   return {
     SAST_OFFSET_MIN: SAST_OFFSET_MIN,
     LEAD_MIN: LEAD_MIN,
@@ -201,6 +212,7 @@
     endTime: endTime,
     overlaps: overlaps,
     buildICS: buildICS,
-    googleCalendarUrl: googleCalendarUrl
+    googleCalendarUrl: googleCalendarUrl,
+    googleCalendarIntentUrl: googleCalendarIntentUrl
   };
 });

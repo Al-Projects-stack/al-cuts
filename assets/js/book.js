@@ -448,10 +448,14 @@
     flow.hidden = true;
     var done = document.getElementById("bookdone");
     done.hidden = false;
-    var gUrl = CAL.googleCalendarUrl({
+    var calArgs = {
       date: b.date, start: b.start, end: b.end, service: b.service,
       barber: b.barber, total: b.total, ref: b.ref, phone: b.phone
-    });
+    };
+    // Mobile Android: deep-link into the Calendar app (web fallback included).
+    // iOS keeps https, which the app opens itself when installed.
+    var isAndroid = /Android/i.test(window.navigator.userAgent || "");
+    var gUrl = isAndroid ? CAL.googleCalendarIntentUrl(calArgs) : CAL.googleCalendarUrl(calArgs);
     done.innerHTML =
       "<div class='success'><p class='kicker'>Booking confirmed</p>" +
       "<h2>See you soon, " + esc(b.name.split(" ")[0]) + ".</h2>" +
@@ -465,7 +469,7 @@
       "<p style='color:var(--muted)'>We will contact " + esc(b.phone) + " if anything changes. " +
       "Free rebooking up to 24 hours before. Arrive 5 minutes early.</p>" +
       "<div class='cta' style='justify-content:center'>" +
-      "<a class='btn' id='gcal' href='" + gUrl.replace(/'/g, "%27") + "' target='_blank' rel='noopener'>Add to Google Calendar</a>" +
+      "<a class='btn' id='gcal' href='" + gUrl.replace(/'/g, "%27") + "'" + (isAndroid ? "" : " target='_blank'") + " rel='noopener'>Add to Google Calendar</a>" +
       "<button class='btn line' id='applecal' type='button'>Add to Apple Calendar</button></div>" +
       "<p><a class='more' href='./'>Book another →</a></p></div>";
     document.getElementById("applecal").addEventListener("click", function () { downloadICS(b); });
