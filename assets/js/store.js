@@ -73,8 +73,20 @@
     return "AC-" + Math.random().toString(36).slice(2, 8).toUpperCase();
   }
 
+  /* Slots with no free chair removed, for display in the picker.
+     barberId "any" keeps a slot when at least one barber is free; a named
+     barber keeps only their own free slots. nowMs is injectable for tests. */
+  function offeredSlots(date, durationMin, barberId, nowMs) {
+    var CAL = root.ALCUTS_CAL;
+    return CAL.slotsFor(date, durationMin, nowMs).filter(function (t) {
+      var end = CAL.endTime(t, durationMin);
+      if (barberId && barberId !== "any") return isFree(barberId, date, t, end);
+      return !!assignBarber(date, t, end);
+    });
+  }
+
   root.ALCUTS_STORE = {
     load: load, isFree: isFree, assignBarber: assignBarber,
-    create: create, makeRef: makeRef
+    create: create, makeRef: makeRef, offeredSlots: offeredSlots
   };
 })(window);

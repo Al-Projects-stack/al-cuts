@@ -126,6 +126,14 @@
       el.querySelector(".om").textContent = b.role;
       el.addEventListener("click", function () {
         state.barber = b.id;
+        // Drop a picked time this barber cannot honour
+        if (state.date && state.time && svc()) {
+          var end = CAL.endTime(state.time, svc().mins);
+          var ok = state.barber === "any"
+            ? !!STORE.assignBarber(state.date, state.time, end)
+            : STORE.isFree(state.barber, state.date, state.time, end);
+          if (!ok) state.time = null;
+        }
         persist(); paintOpts(); setErr("e-2", "");
       });
       barOpts.appendChild(el);
@@ -234,8 +242,9 @@
       btn.type = "button";
       btn.className = "day";
       btn.textContent = d;
-      if (open[ds]) {
-        btn.setAttribute("data-date", ds);
+      btn.setAttribute("data-date", ds);
+      var dur = svc() ? svc().mins : 0;
+      if (open[ds] && (!dur || STORE.offeredSlots(ds, dur, state.barber).length > 0)) {
         btn.setAttribute("aria-label", dateLabel(ds));
         if (ds === state.date) { btn.classList.add("sel"); btn.setAttribute("aria-pressed", "true"); }
         else btn.setAttribute("aria-pressed", "false");
@@ -248,7 +257,7 @@
         })(ds);
       } else {
         btn.disabled = true;
-        btn.setAttribute("aria-label", d + " " + MO[m - 1] + ": closed or unavailable");
+        btn.setAttribute("aria-label", d + " " + MO[m - 1] + (open[ds] ? ": fully booked" : ": closed or unavailable"));
       }
       grid.appendChild(btn);
     }
@@ -268,7 +277,8 @@
 
   function renderSlots() {
     var s = svc();
-    var slots = (state.date && s) ? CAL.slotsFor(state.date, s.mins) : [];
+    var raw = (state.date && s) ? CAL.slotsFor(state.date, s.mins) : [];
+    var slots = (state.date && s) ? STORE.offeredSlots(state.date, s.mins, state.barber) : [];
     var inner = document.createElement("div");
     inner.className = "slot-in";
     if (!state.date) {
@@ -276,8 +286,11 @@
     } else if (!s) {
       inner.innerHTML = "<p class='hint'>Pick a service in step 1 first — times depend on duration.</p>";
     } else if (!slots.length) {
-      inner.innerHTML = "<p class='hint'>No times left on " + dateLabel(state.date) + " for a " +
-        s.mins + "-minute service. Try another day.</p>";
+      inner.innerHTML = raw.length
+        ? "<p class='hint'>Fully booked on " + dateLabel(state.date) + " for a " +
+          s.mins + "-minute service. Try another day.</p>"
+        : "<p class='hint'>No times left on " + dateLabel(state.date) + " for a " +
+          s.mins + "-minute service. Try another day.</p>";
     } else {
       slots.forEach(function (t) {
         var b = document.createElement("button");
