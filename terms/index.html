@@ -4,8 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Terms and Conditions | AL CUTS</title>
-<meta name="description" content="AL CUTS terms and conditions: bookings, payments, rebooking and house rules.">
-<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="description" content="AL CUTS terms: bookings, arrival and lateness, cancellation, pricing, first-visit offer, minors, liability and South African governing law.">
+<meta property="og:title" content="Terms and Conditions | AL CUTS">
+<meta property="og:description" content="The house rules at AL CUTS, Rosebank — bookings, cancellations, pricing and more.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://al-projects-stack.github.io/al-cuts/terms/">
+<meta property="og:image" content="https://al-projects-stack.github.io/al-cuts/assets/img/hero.webp">
+<link rel="icon" type="image/png" href="../assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
@@ -15,7 +21,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header>
   <div class="wrap bar">
-    <a class="logo" href="../" aria-label="AL CUTS home"><img src="../assets/img/logo.svg" alt="" width="32" height="32" aria-hidden="true">AL CUTS</a>
+    <a class="logo" href="../" aria-label="AL CUTS home"><img class="logo-img" src="../assets/img/logo-256.png" alt="AL CUTS logo — barber cutting a client's hair" width="40" height="40">AL CUTS</a>
     <button id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav id="nav" aria-label="Primary">
       <a href="../">Home</a><a href="../services/">Services</a><a href="../about/">About</a><a href="../book/">Contact</a>
@@ -23,25 +29,71 @@
     </nav>
   </div>
 </header>
-<main id="main"><div class="wrap legal">
-  <p class="kicker" style="margin-top:120px">Legal</p>
-  <h2>Terms and Conditions</h2>
-  <p>Last updated: September 2026. These fictional terms accompany this demonstration website for AL CUTS, Rosebank.</p>
-  <h3>Bookings</h3>
-  <p>Online bookings are requests until confirmed by phone. Arriving more than 15 minutes late may require rebooking. Free rebooking is available up to 24 hours before your slot.</p>
-  <h3>Prices and payment</h3>
-  <p>All prices are in South African rand and payable at the chair by card or cash. The first-visit offer (R30 off) applies once per customer to bookings made online.</p>
-  <h3>House rules</h3>
-  <ul><li>Children under 12 must be accompanied by an adult.</li><li>Walk-ins are welcome when chairs are free; bookings take priority.</li><li>Tools are sanitised after every client and a fresh blade is used per shave.</li></ul>
-  <h3>Contact</h3>
-  <p>AL CUTS, 12 Oxford Road, Rosebank, Johannesburg · 011 555 0142 · <a href="mailto:book@alcuts.co.za">book@alcuts.co.za</a></p>
+<main id="main"><div class="wrap legalgrid">
+  <aside class="toc" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#acceptance">1. Acceptance</a></li>
+      <li><a href="#bookings">2. Bookings and confirmation</a></li>
+      <li><a href="#arrival">3. Arrival and lateness</a></li>
+      <li><a href="#cancellation">4. Cancellation and rescheduling</a></li>
+      <li><a href="#noshow">5. No-shows</a></li>
+      <li><a href="#pricing">6. Pricing and payment</a></li>
+      <li><a href="#offer">7. First-visit offer</a></li>
+      <li><a href="#health">8. Health and skin conditions</a></li>
+      <li><a href="#minors">9. Minors and kids cuts</a></li>
+      <li><a href="#liability">10. Liability</a></li>
+      <li><a href="#photos">11. Photography and social media</a></li>
+      <li><a href="#data">12. Personal data</a></li>
+      <li><a href="#changes">13. Changes to these terms</a></li>
+      <li><a href="#law">14. Governing law</a></li>
+      <li><a href="#contact">15. Contact</a></li>
+    </ol>
+  </aside>
+  <article class="legal">
+    <p class="kicker" style="margin-top:0">Legal</p>
+    <h2>Terms and Conditions</h2>
+    <p>Last updated: 24 September 2026.</p>
+    <h3 id="acceptance">1. Acceptance</h3>
+    <p>By booking a chair at AL CUTS (“the shop”, “we”), whether online, by phone or in person, you accept these terms. If you do not agree, please do not book.</p>
+    <h3 id="bookings">2. Bookings and confirmation</h3>
+    <p>An online booking is a request until we confirm it. We confirm by phone, SMS, WhatsApp or email, usually within one working day. Your slot is only guaranteed once confirmed. Details you provide (service, barber, date, time, contact) must be accurate.</p>
+    <h3 id="arrival">3. Arrival and lateness policy</h3>
+    <p>Please arrive 5 minutes early. A 15-minute grace period applies from your booked start time. After 15 minutes we may shorten the service to fit the chair schedule, or release the chair and treat the booking as a no-show.</p>
+    <h3 id="cancellation">4. Cancellation and rescheduling</h3>
+    <p>Life happens. Cancel or reschedule free of charge with at least 24 hours’ notice by calling <a href="tel:+27115550142">011 555 0142</a>. Rescheduling inside 24 hours is subject to chair availability on the day.</p>
+    <h3 id="noshow">5. No-shows</h3>
+    <p>Clients who repeatedly fail to arrive without notice may be asked to confirm future bookings by phone, or may be refused online booking. Be kind to the chair — someone else wants it.</p>
+    <h3 id="pricing">6. Pricing and payment</h3>
+    <p>All prices are in South African rand (R) and include VAT where applicable. Payment is due at the chair by card or cash. The price list on the <a href="../services/">Services</a> page is the single source of truth; any difference at the shop will be resolved in your favour.</p>
+    <h3 id="offer">7. First-visit offer conditions</h3>
+    <p>First-time clients who book online receive R30 off one service, applied at the chair. One redemption per person, not transferable, not redeemable for cash, and cannot be combined with other promotions unless stated.</p>
+    <h3 id="health">8. Health, skin conditions and patch disclosure</h3>
+    <p>Tell your barber before the cut about any scalp or skin condition, allergy (including to nickel, latex or fragrances), recent injury, or medical treatment affecting skin or hair. We may decline or adapt a service — including hot-towel shaves — where proceeding could harm you. A patch or sensitivity disclosure may be required before chemical-adjacent products are used.</p>
+    <h3 id="minors">9. Minors and kids cuts</h3>
+    <p>Kids cuts are for children under 12. A parent or guardian must be present in the shop for the full service and must consent to the cut on the child’s behalf.</p>
+    <h3 id="liability">10. Liability</h3>
+    <p>We exercise professional skill and care, sanitise tools after every client, and use a fresh blade per shave. To the maximum extent permitted by South African law, our liability for any claim arising from a service is limited to the price paid for that service. Nothing here limits liability that cannot legally be limited.</p>
+    <h3 id="photos">11. Photography and social media</h3>
+    <p>We love showing sharp work. We will only photograph you or post your cut on our social channels with your clear permission, given at the shop. You may withdraw that permission at any time by contacting us.</p>
+    <h3 id="data">12. Personal data</h3>
+    <p>We process booking details under South Africa’s Protection of Personal Information Act (POPIA). See our <a href="../privacy/">Privacy notice</a> for what we collect, why, how long we keep it, and how to request deletion.</p>
+    <h3 id="changes">13. Changes to these terms</h3>
+    <p>We may update these terms from time to time. The version in force is the one published on this page at the time you book.</p>
+    <h3 id="law">14. Governing law</h3>
+    <p>These terms are governed by the laws of the Republic of South Africa. The courts of Johannesburg have jurisdiction over any dispute.</p>
+    <h3 id="contact">15. Contact</h3>
+    <p>AL CUTS, 12 Oxford Road, Rosebank, Johannesburg · <a href="tel:+27115550142">011 555 0142</a> · <a href="mailto:book@alcuts.co.za">book@alcuts.co.za</a></p>
+  </article>
 </div></main>
 <footer><div class="wrap">
   <div class="fgrid">
-    <div><div class="foot-brand"><img src="../assets/img/logo.svg" alt="" width="30" height="30" aria-hidden="true"><h4>AL CUTS</h4></div>Sharp by name. Sharp by nature.</div>
-    <div><h4>Explore</h4><a href="../services/">Services</a><a href="../about/">About</a><a href="../book/">Book Now</a></div>
+    <div><div class="foot-brand"><img class="logo-img" src="../assets/img/logo-256.png" alt="" width="36" height="36" aria-hidden="true"><h4>AL CUTS</h4></div>Sharp by name. Sharp by nature.
+      <p class="social"><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="AL CUTS on Instagram">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="AL CUTS on Facebook">Facebook</a><a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="AL CUTS on TikTok">TikTok</a></p>
+    </div>
+    <div><h4>Explore</h4><a href="../">Home</a><a href="../services/">Services</a><a href="../about/">About</a><a href="../book/">Book Now</a></div>
     <div><h4>Hours</h4>Tue to Fri 9:00 to 18:00<br>Sat 8:00 to 16:00<br>Sun and Mon closed</div>
-    <div><h4>Visit</h4>12 Oxford Road, Rosebank<br>011 555 0142<a href="../book/">Contact and map</a></div>
+    <div><h4>Visit</h4>12 Oxford Road, Rosebank<br><a href="tel:+27115550142">011 555 0142</a><a href="mailto:book@alcuts.co.za">book@alcuts.co.za</a></div>
   </div>
   <div class="copy"><span>&copy; 2026 AL CUTS. All rights reserved.</span><span><a href="./">Terms and Conditions</a><a href="../privacy/">Privacy</a></span></div>
 </div></footer>

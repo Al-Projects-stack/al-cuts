@@ -17,6 +17,13 @@
         menu.setAttribute("aria-expanded", "false");
       }
     });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.classList.contains("open")) {
+        nav.classList.remove("open");
+        menu.setAttribute("aria-expanded", "false");
+        menu.focus();
+      }
+    });
   }
 
   var modal = document.getElementById("modal");

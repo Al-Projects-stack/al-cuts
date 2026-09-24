@@ -4,8 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Privacy | AL CUTS</title>
-<meta name="description" content="AL CUTS privacy notice: what booking details we collect and why.">
-<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="description" content="AL CUTS privacy notice under POPIA: what booking data we collect, why, how long we keep it, and how to request deletion.">
+<meta property="og:title" content="Privacy | AL CUTS">
+<meta property="og:description" content="How AL CUTS handles your booking details under South Africa's POPIA.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://al-projects-stack.github.io/al-cuts/privacy/">
+<meta property="og:image" content="https://al-projects-stack.github.io/al-cuts/assets/img/hero.webp">
+<link rel="icon" type="image/png" href="../assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
@@ -15,7 +21,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header>
   <div class="wrap bar">
-    <a class="logo" href="../" aria-label="AL CUTS home"><img src="../assets/img/logo.svg" alt="" width="32" height="32" aria-hidden="true">AL CUTS</a>
+    <a class="logo" href="../" aria-label="AL CUTS home"><img class="logo-img" src="../assets/img/logo-256.png" alt="AL CUTS logo — barber cutting a client's hair" width="40" height="40">AL CUTS</a>
     <button id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav id="nav" aria-label="Primary">
       <a href="../">Home</a><a href="../services/">Services</a><a href="../about/">About</a><a href="../book/">Contact</a>
@@ -23,23 +29,58 @@
     </nav>
   </div>
 </header>
-<main id="main"><div class="wrap legal">
-  <p class="kicker" style="margin-top:120px">Legal</p>
-  <h2>Privacy</h2>
-  <p>Last updated: September 2026. This demonstration site collects the minimum needed to run the booking flow.</p>
-  <h3>What we collect</h3>
-  <ul><li>Booking details you enter: service, barber, date, time, name, phone and optional notes.</li><li>A session flag remembering whether you have seen the first-visit offer.</li></ul>
-  <h3>How it is used</h3>
-  <p>Booking details are used only to confirm and manage your visit. In this demo they stay in your own browser (local storage) and are never sent to a server.</p>
-  <h3>Your choices</h3>
-  <p>Clear your browser storage at any time to remove saved bookings. Contact <a href="mailto:book@alcuts.co.za">book@alcuts.co.za</a> with any questions.</p>
+<main id="main"><div class="wrap legalgrid">
+  <aside class="toc" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#who">1. Who we are</a></li>
+      <li><a href="#what">2. What data we collect</a></li>
+      <li><a href="#why">3. Why we use it</a></li>
+      <li><a href="#sharing">4. Sharing</a></li>
+      <li><a href="#retention">5. How long we keep it</a></li>
+      <li><a href="#rights">6. Your rights and deletion</a></li>
+      <li><a href="#security">7. Security</a></li>
+      <li><a href="#children">8. Children’s data</a></li>
+      <li><a href="#contact">9. Contact</a></li>
+    </ol>
+  </aside>
+  <article class="legal">
+    <p class="kicker" style="margin-top:0">Legal</p>
+    <h2>Privacy</h2>
+    <p>Last updated: 24 September 2026. AL CUTS processes personal information in line with South Africa’s Protection of Personal Information Act 4 of 2013 (POPIA).</p>
+    <h3 id="who">1. Who we are</h3>
+    <p>AL CUTS (“we”) is a barbershop at 12 Oxford Road, Rosebank, Johannesburg. For POPIA purposes we are the responsible party for booking information you give us. Contact: <a href="mailto:book@alcuts.co.za">book@alcuts.co.za</a> · <a href="tel:+27115550142">011 555 0142</a>.</p>
+    <h3 id="what">2. What data we collect</h3>
+    <ul>
+      <li>Booking details: service, barber, date, time, and optional notes.</li>
+      <li>Contact details: your full name, email address and phone number.</li>
+      <li>Technical minimum: whether you have seen the first-visit offer (a session flag) so the popup opens once per visit.</li>
+    </ul>
+    <p>We do not collect ID numbers, banking details or passwords on this website — payment happens at the chair.</p>
+    <h3 id="why">3. Why we use it</h3>
+    <p>We use your details only to confirm and manage your visit, contact you about changes, apply the first-visit offer, and run the shop schedule. We will not use your number or email for marketing unless you clearly opt in at the shop.</p>
+    <h3 id="sharing">4. Sharing</h3>
+    <p>We do not sell personal information. Booking details are visible only to the shop’s barbers and only as needed to honour your appointment. If the law requires disclosure (for example a court order), we will disclose only what is required.</p>
+    <h3 id="retention">5. How long we keep it</h3>
+    <p>Confirmed booking records are kept for 24 months for schedule, tax and dispute purposes, then deleted or de-identified. Session flags expire when you close the browser. On this demonstration build, bookings are stored in your own browser (local storage) rather than on our server — clearing your browser storage removes them from your device.</p>
+    <h3 id="rights">6. Your rights and deletion</h3>
+    <p>Under POPIA you may ask what we hold about you, ask us to correct it, object to processing, or request deletion. Email <a href="mailto:book@alcuts.co.za">book@alcuts.co.za</a> with “POPIA request” in the subject line and we will respond within a reasonable time. You may also lodge a complaint with the Information Regulator of South Africa.</p>
+    <h3 id="security">7. Security</h3>
+    <p>We apply reasonable safeguards: access limited to the barbers who need it, devices kept updated, and no more data collected than the booking needs. No method is perfectly secure, so please do not send sensitive documents through the booking form.</p>
+    <h3 id="children">8. Children’s data</h3>
+    <p>Kids-cut bookings include a parent or guardian’s contact details, provided by that adult with consent. We do not knowingly collect information directly from children.</p>
+    <h3 id="contact">9. Contact</h3>
+    <p>Questions about this notice: AL CUTS, 12 Oxford Road, Rosebank, Johannesburg · <a href="mailto:book@alcuts.co.za">book@alcuts.co.za</a> · <a href="tel:+27115550142">011 555 0142</a></p>
+  </article>
 </div></main>
 <footer><div class="wrap">
   <div class="fgrid">
-    <div><div class="foot-brand"><img src="../assets/img/logo.svg" alt="" width="30" height="30" aria-hidden="true"><h4>AL CUTS</h4></div>Sharp by name. Sharp by nature.</div>
-    <div><h4>Explore</h4><a href="../services/">Services</a><a href="../about/">About</a><a href="../book/">Book Now</a></div>
+    <div><div class="foot-brand"><img class="logo-img" src="../assets/img/logo-256.png" alt="" width="36" height="36" aria-hidden="true"><h4>AL CUTS</h4></div>Sharp by name. Sharp by nature.
+      <p class="social"><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="AL CUTS on Instagram">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="AL CUTS on Facebook">Facebook</a><a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="AL CUTS on TikTok">TikTok</a></p>
+    </div>
+    <div><h4>Explore</h4><a href="../">Home</a><a href="../services/">Services</a><a href="../about/">About</a><a href="../book/">Book Now</a></div>
     <div><h4>Hours</h4>Tue to Fri 9:00 to 18:00<br>Sat 8:00 to 16:00<br>Sun and Mon closed</div>
-    <div><h4>Visit</h4>12 Oxford Road, Rosebank<br>011 555 0142<a href="../book/">Contact and map</a></div>
+    <div><h4>Visit</h4>12 Oxford Road, Rosebank<br><a href="tel:+27115550142">011 555 0142</a><a href="mailto:book@alcuts.co.za">book@alcuts.co.za</a></div>
   </div>
   <div class="copy"><span>&copy; 2026 AL CUTS. All rights reserved.</span><span><a href="../terms/">Terms and Conditions</a><a href="./">Privacy</a></span></div>
 </div></footer>

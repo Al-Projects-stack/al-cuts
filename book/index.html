@@ -5,7 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Book and contact | AL CUTS</title>
 <meta name="description" content="Book your chair at AL CUTS, 12 Oxford Road Rosebank Johannesburg. Open Tue–Sat. Call 011 555 0142.">
-<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta property="og:title" content="Book and contact | AL CUTS">
+<meta property="og:description" content="Pick a service, barber and time. Pay at the chair — card or cash.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://al-projects-stack.github.io/al-cuts/book/">
+<meta property="og:image" content="https://al-projects-stack.github.io/al-cuts/assets/img/hero.webp">
+<link rel="icon" type="image/png" href="../assets/img/favicon-64.png">
+<link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
@@ -15,7 +21,7 @@
 <a class="skip" href="#main">Skip to content</a>
 <header>
   <div class="wrap bar">
-    <a class="logo" href="../" aria-label="AL CUTS home"><img src="../assets/img/logo.svg" alt="" width="32" height="32" aria-hidden="true">AL CUTS</a>
+    <a class="logo" href="../" aria-label="AL CUTS home"><img class="logo-img" src="../assets/img/logo-256.png" alt="AL CUTS logo — barber cutting a client's hair" width="40" height="40">AL CUTS</a>
     <button id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav id="nav" aria-label="Primary">
       <a href="../">Home</a><a href="../services/">Services</a><a href="../about/">About</a><a href="./" aria-current="page">Contact</a>
@@ -39,51 +45,85 @@
 
   <div class="wrap bookgrid">
     <section class="panel" aria-labelledby="bh">
-      <h2 id="bh">Book a chair</h2>
-      <p class="sub">Pick a service, barber and time. Pay at the chair — card or cash.</p>
-      <div class="offer-note" id="offer-note" hidden>First-visit offer applied: <strong>R30 off</strong>. Shown in your summary below.</div>
-      <form id="bookform" novalidate>
-        <div class="field">
-          <label for="f-service">Service</label>
-          <select id="f-service" name="service"><option value="">Select a service</option></select>
-          <p class="err" id="e-service" role="alert"></p>
+      <div id="flow">
+        <h2 id="bh">Book a chair</h2>
+        <p class="sub">Five quick steps. Pay at the chair — card or cash.</p>
+        <div class="offer-note" id="offer-note" hidden>First-visit offer applied: <strong>R30 off</strong>. Shown in your review below.</div>
+
+        <ol class="stepper" id="stepper" aria-label="Booking progress">
+          <li data-s="1"><span aria-hidden="true">1</span> Service</li>
+          <li data-s="2"><span aria-hidden="true">2</span> Barber</li>
+          <li data-s="3"><span aria-hidden="true">3</span> Date &amp; time</li>
+          <li data-s="4"><span aria-hidden="true">4</span> Details</li>
+          <li data-s="5"><span aria-hidden="true">5</span> Review</li>
+        </ol>
+
+        <div class="step" id="step-1" role="group" aria-labelledby="h-1">
+          <h3 id="h-1" tabindex="-1">Step 1 — Choose your service</h3>
+          <div class="opts" id="svc-opts"></div>
+          <p class="err" id="e-1" role="alert"></p>
+          <div class="stepnav"><span></span><button class="btn" type="button" data-next="2">Continue</button></div>
         </div>
-        <div class="field">
-          <label for="f-barber">Barber</label>
-          <select id="f-barber" name="barber"><option value="">First available</option></select>
+
+        <div class="step" id="step-2" role="group" aria-labelledby="h-2" hidden>
+          <h3 id="h-2" tabindex="-1">Step 2 — Choose your barber</h3>
+          <div class="opts" id="bar-opts"></div>
+          <p class="err" id="e-2" role="alert"></p>
+          <div class="stepnav"><button class="btn line" type="button" data-back="1">Back</button><button class="btn" type="button" data-next="3">Continue</button></div>
         </div>
-        <div class="frow">
-          <div class="field">
-            <label for="f-date">Date</label>
-            <input id="f-date" name="date" type="date">
-            <p class="err" id="e-date" role="alert"></p>
-          </div>
-          <div class="field">
-            <label for="f-time">Time</label>
-            <select id="f-time" name="time" disabled><option value="">Pick a date first</option></select>
-            <p class="err" id="e-time" role="alert"></p>
-          </div>
+
+        <div class="step" id="step-3" role="group" aria-labelledby="h-3" hidden>
+          <h3 id="h-3" tabindex="-1">Step 3 — Pick a date and time</h3>
+          <p class="hint">Open Tue–Fri 9:00–18:00, Sat 8:00–16:00. Closed Sun &amp; Mon. Times are Johannesburg time (SAST).</p>
+          <div id="cal"></div>
+          <h4 class="slottitle">Available times</h4>
+          <div class="slots" id="slots"><p class="hint">Select a date above to see times.</p></div>
+          <p class="err" id="e-3" role="alert"></p>
+          <div class="stepnav"><button class="btn line" type="button" data-back="2">Back</button><button class="btn" type="button" data-next="4">Continue</button></div>
         </div>
-        <div class="frow">
-          <div class="field">
-            <label for="f-name">Your name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Thabo M">
-            <p class="err" id="e-name" role="alert"></p>
-          </div>
-          <div class="field">
-            <label for="f-phone">Phone</label>
-            <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 082 555 0142">
-            <p class="err" id="e-phone" role="alert"></p>
-          </div>
+
+        <div class="step" id="step-4" role="group" aria-labelledby="h-4" hidden>
+          <h3 id="h-4" tabindex="-1">Step 4 — Your details</h3>
+          <form id="details" novalidate>
+            <div class="field">
+              <label for="f-name">Full name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" placeholder="e.g. Thabo Mokoena">
+              <p class="err" id="e-name" role="alert"></p>
+            </div>
+            <div class="frow">
+              <div class="field">
+                <label for="f-email">Email</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" placeholder="you@example.co.za">
+                <p class="err" id="e-email" role="alert"></p>
+              </div>
+              <div class="field">
+                <label for="f-phone">Phone (SA)</label>
+                <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="e.g. 082 555 0142">
+                <p class="err" id="e-phone" role="alert"></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-notes">Notes (optional)</label>
+              <textarea id="f-notes" name="notes" rows="3" placeholder="Reference photo, hair type, anything we should know"></textarea>
+            </div>
+            <div class="field check">
+              <input id="f-terms" type="checkbox">
+              <label for="f-terms">I accept the <a href="../terms/">Terms and Conditions</a></label>
+              <p class="err" id="e-terms" role="alert"></p>
+            </div>
+          </form>
+          <p class="err" id="e-4" role="alert"></p>
+          <div class="stepnav"><button class="btn line" type="button" data-back="3">Back</button><button class="btn" type="button" data-next="5">Review booking</button></div>
         </div>
-        <div class="field">
-          <label for="f-notes">Notes (optional)</label>
-          <textarea id="f-notes" name="notes" rows="3" placeholder="Reference photo, hair type, anything we should know"></textarea>
+
+        <div class="step" id="step-5" role="group" aria-labelledby="h-5" hidden>
+          <h3 id="h-5" tabindex="-1">Step 5 — Review and confirm</h3>
+          <div class="summary" id="review" aria-live="polite"></div>
+          <p class="err" id="e-5" role="alert"></p>
+          <div class="stepnav"><button class="btn line" type="button" data-back="4">Back</button><button class="btn" type="button" id="confirm">Confirm booking</button></div>
         </div>
-        <div class="summary" id="summary" aria-live="polite"></div>
-        <button class="btn" type="submit" style="width:100%">Confirm booking</button>
-        <p style="color:var(--muted);font-size:.92rem">Free rebooking within 24 hours. Walk-ins welcome when chairs are free.</p>
-      </form>
+      </div>
+
       <div id="bookdone" hidden></div>
     </section>
 
@@ -113,10 +153,12 @@
 
 <footer><div class="wrap">
   <div class="fgrid">
-    <div><div class="foot-brand"><img src="../assets/img/logo.svg" alt="" width="30" height="30" aria-hidden="true"><h4>AL CUTS</h4></div>Sharp by name. Sharp by nature.</div>
-    <div><h4>Explore</h4><a href="../services/">Services</a><a href="../about/">About</a><a href="./">Book Now</a></div>
+    <div><div class="foot-brand"><img class="logo-img" src="../assets/img/logo-256.png" alt="" width="36" height="36" aria-hidden="true"><h4>AL CUTS</h4></div>Sharp by name. Sharp by nature.
+      <p class="social"><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="AL CUTS on Instagram">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="AL CUTS on Facebook">Facebook</a><a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="AL CUTS on TikTok">TikTok</a></p>
+    </div>
+    <div><h4>Explore</h4><a href="../">Home</a><a href="../services/">Services</a><a href="../about/">About</a><a href="./">Book Now</a></div>
     <div><h4>Hours</h4>Tue to Fri 9:00 to 18:00<br>Sat 8:00 to 16:00<br>Sun and Mon closed</div>
-    <div><h4>Visit</h4>12 Oxford Road, Rosebank<br>011 555 0142<a href="./">Contact and map</a></div>
+    <div><h4>Visit</h4>12 Oxford Road, Rosebank<br><a href="tel:+27115550142">011 555 0142</a><a href="mailto:book@alcuts.co.za">book@alcuts.co.za</a></div>
   </div>
   <div class="copy"><span>&copy; 2026 AL CUTS. All rights reserved.</span><span><a href="../terms/">Terms and Conditions</a><a href="../privacy/">Privacy</a></span></div>
 </div></footer>
@@ -131,6 +173,8 @@
 </div>
 
 <script src="../assets/js/services-data.js" defer></script>
+<script src="../assets/js/calendar.js" defer></script>
+<script src="../assets/js/store.js" defer></script>
 <script src="../assets/js/site.js" defer></script>
 <script src="../assets/js/book.js" defer></script>
 </body>
