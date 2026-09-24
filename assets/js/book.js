@@ -267,36 +267,35 @@
   }
 
   function renderSlots() {
-    slotBox.innerHTML = "";
     var s = svc();
+    var slots = (state.date && s) ? CAL.slotsFor(state.date, s.mins) : [];
+    var inner = document.createElement("div");
+    inner.className = "slot-in";
     if (!state.date) {
-      slotBox.innerHTML = "<p class='hint'>Select a date above to see times.</p>";
-      return;
-    }
-    if (!s) {
-      slotBox.innerHTML = "<p class='hint'>Pick a service in step 1 first — times depend on duration.</p>";
-      return;
-    }
-    var slots = CAL.slotsFor(state.date, s.mins);
-    if (!slots.length) {
-      slotBox.innerHTML = "<p class='hint'>No times left on " + dateLabel(state.date) + " for a " +
+      inner.innerHTML = "<p class='hint'>Select a date above to see times.</p>";
+    } else if (!s) {
+      inner.innerHTML = "<p class='hint'>Pick a service in step 1 first — times depend on duration.</p>";
+    } else if (!slots.length) {
+      inner.innerHTML = "<p class='hint'>No times left on " + dateLabel(state.date) + " for a " +
         s.mins + "-minute service. Try another day.</p>";
-      return;
-    }
-    slots.forEach(function (t) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "slot" + (t === state.time ? " sel" : "");
-      b.textContent = t;
-      b.setAttribute("aria-pressed", t === state.time ? "true" : "false");
-      b.setAttribute("aria-label", t + " Johannesburg time");
-      b.addEventListener("click", function () {
-        state.time = t;
-        persist(); paintSlotSel(); setErr("e-3", "");
-        go(4); // time picked — move straight to details
+    } else {
+      slots.forEach(function (t) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "slot" + (t === state.time ? " sel" : "");
+        b.textContent = t;
+        b.setAttribute("aria-pressed", t === state.time ? "true" : "false");
+        b.setAttribute("aria-label", t + " Johannesburg time");
+        b.addEventListener("click", function () {
+          state.time = t;
+          persist(); paintSlotSel(); setErr("e-3", "");
+        });
+        inner.appendChild(b);
       });
-      slotBox.appendChild(b);
-    });
+    }
+    slotBox.innerHTML = "";
+    slotBox.appendChild(inner);
+    slotBox.classList.toggle("open", !!state.date);
   }
 
   function paintSlotSel() {

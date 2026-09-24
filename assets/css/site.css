@@ -247,7 +247,9 @@ footer a:hover{color:var(--ink)}
 .day.sel{background:var(--red);border-color:var(--red);color:#fff}
 .day:disabled{opacity:.28;cursor:not-allowed}
 .slottitle{font:600 1.3rem "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);margin:26px 0 10px}
-.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slots{display:grid;grid-template-rows:0fr;opacity:0;margin-top:0;transition:grid-template-rows .45s cubic-bezier(.22,.8,.3,1),opacity .3s ease,margin .45s ease}
+.slots.open{grid-template-rows:1fr;opacity:1;margin-top:14px}
+.slot-in{overflow:hidden;min-height:0;display:flex;flex-wrap:wrap;gap:8px}
 .slot{background:var(--bg);border:1px solid var(--line);color:var(--ink);font:600 1rem Barlow,sans-serif;padding:10px 16px;min-height:44px;min-width:76px;cursor:pointer}
 .slot:hover{border-color:var(--steel)}
 .slot.sel{background:var(--red);border-color:var(--red);color:#fff}
@@ -333,4 +335,5 @@ footer a:hover{color:var(--ink)}
   html{scroll-behavior:auto}
   .shine::after{content:none}
   .btn::after,button::after{content:none}
+  .slots{transition:none}
 }
